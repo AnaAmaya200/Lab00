@@ -82,7 +82,8 @@ El sistema recibe un byte de entrada lo carga en el registro y lo transmite bit 
 
 <img width="1159" height="393" alt="image" src="https://github.com/user-attachments/assets/515ae851-23fd-4403-9a19-08d69910c630" />
 
-**Explicación del funcionamiento:**
+**Funcionamiento:**
+
 Se observa el correcto flujo de datos a través de los estados definidos, al recibir el pulso de start, el sistema sale de IDLE y pasa a transmitir. De acuerdo con los requerimientos técnicos, se conf irma lo siguiente:
 
 **Transmisión correcta de los 8 bits:** Se verifica en la gráfica que, tras cargar los datos de prueba 8'hA5 y 8'h3C, el registro de desplazamiento transfiere los valores correctamente a la línea tx bit a bit.
