@@ -5,11 +5,11 @@ Cristian
 
 En este repositorio se encuentran el diseño, implementación en código Verilog y resultados de simulación de los tres ejercicios planteados de maquina de estado. El flujo de diseño digital aplicado incluye el planteamiento de la arquitectura Control y Datapath, y la verificación con testbench en Verilog y GTKWave.
 
-
-* `/src/`: Contiene los archivos fuente en Verilog (`.v`) de los diseños.
-* `/sim/`: Contiene los archivos *testbench* (`tb_*.v`) para la simulación.
-* `/img/`: Contiene los diagramas de bloques y capturas de GTKWave.
-* `README.md`: Este informe.
+Se encuentran:
+* los archivos fuente en Verilog (.v) de los diseños.
+* los archivos testbench (tb.v) para la simulación.
+* los diagramas de bloques y capturas de GTKWave.
+* README.md Este informe.
 
 ---
 
