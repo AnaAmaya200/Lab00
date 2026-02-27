@@ -1,4 +1,7 @@
 # Lab 00 -  Introducción a Verilog, Simulación y Máquinas de Estados Finitos (FSM)
+**Estudiantes:**
+Ana María Amaya Gómez
+Cristian
 
 En este repositorio se encuentran el diseño, implementación en código Verilog y resultados de simulación de los tres ejercicios planteados de maquina de estado. El flujo de diseño digital aplicado incluye el planteamiento de la arquitectura Control y Datapath, y la verificación con testbench en Verilog y GTKWave.
 
