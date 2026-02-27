@@ -25,10 +25,8 @@ El diseño cuenta con un registro de estado de 2 bits y tiene de tres estados pr
 ### 1.2 Diagrama
 <img width="892" height="575" alt="image" src="https://github.com/user-attachments/assets/cea9f85e-c723-439a-89d2-3abb5bb6dd54" />
 
-
 ### 1.3 Resultados de Simulación
 <img width="1174" height="383" alt="image" src="https://github.com/user-attachments/assets/b8cdcb94-8335-44a9-8729-b2af25ae15a1" />
-
 
 **Análisis de la simulación:**
 **Secuencia:** Se aprecia que la señal green permanece en alto (1) durante exactamente 5 ciclos de reloj, cuando termina este tiempo, la máquina pasa al estado S1, activando yellow por 2 ciclos, y después al estado S2, manteniendo red en alto por 4 ciclos, para luego reiniciar el patrón.
@@ -55,15 +53,14 @@ El funcionamiento lo dividimos en 4 estados muy fáciles de seguir:
 ### 2.2 Diagrama
 <img width="1042" height="601" alt="image" src="https://github.com/user-attachments/assets/72da10a7-b667-4efb-9607-b60ebc58917e" />
 
-
 ### 2.3 Resultados de Simulación
 <img width="1165" height="338" alt="image" src="https://github.com/user-attachments/assets/a3ff8f3c-f08c-441f-a2da-29ed27f76c30" />
 
+### 2.4 Análisis de la simulación:
 
-**Análisis de la simulación:**
-[📝 Nota para ti: Explica cómo se ve el pulso de start, cómo el registro 'acc' va incrementando su valor en cada ciclo de reloj, y cómo se activa la señal 'done'].
+**Acumulación y finalización:** En la primera prueba, tras aplicar el pulso de start con una entrada x = 5, la maquina entra al estado ADD (codificado como 10). Se evidencia cómo el bus acc realiza las sumas iterativas mostrando los resultados en hexadecimal (05, 0A, 0F, 14). Al alcanzar la condición de salida, el sistema activa done por un ciclo de reloj y retorna a IDLE (00).
 
----
+**Interrupción por cancelación:** En las siguientes dos pruebas (con entradas x = 3 y x = 1), se inicia correctamente el proceso de suma. A mitad de la operación iterativa se usa cancel. La gráfica demuestra que el sistema responde de manera inmediata, transiciona directamente al estado de reposo IDLE (00), y no emite el pulso de done, confirmando que la operación fue anulada
 
 ##  Ejercicio 3: Transmisor Serial Síncrono
 
@@ -75,7 +72,7 @@ El sistema recibe un byte de entrada lo carga en el registro y lo transmite bit 
 ### 3.2 Diagrama de Bloques
 
 ![Carta ASM Transmisor](./img/asm_transmisor.png)
-*(Añade aquí tu diagrama de bloques y/o dibujo de la máquina de estados ASM)*
+
 
 ### 3.3 Resultados de Simulación y Análisis en GTKWave
 <img width="1106" height="355" alt="image" src="https://github.com/user-attachments/assets/d4e75110-e09f-42b7-8741-e391a5f19b47" />
@@ -86,6 +83,9 @@ El sistema recibe un byte de entrada lo carga en el registro y lo transmite bit 
 Se observa el correcto flujo de datos a través de los estados definidos, al recibir el pulso de start, el sistema sale de IDLE y pasa a transmitir. De acuerdo con los requerimientos técnicos, se conf irma lo siguiente:
 
 **Transmisión correcta de los 8 bits:** Se verifica en la gráfica que, tras cargar los datos de prueba 8'hA5 y 8'h3C, el registro de desplazamiento transfiere los valores correctamente a la línea tx bit a bit.
+
 **Duración exacta de cada bit:** Se observa que la señal tx mantiene su valor durante CLKS_PER_BIT ciclos de reloj. Esto se logra gracias al contador interno tick_cnt, el cual se reinicia apropiadamente al cambiar de bit.
+
 **Activación correcta de busy:** La señal busy se eleva a 1 lógico en el estado LOAD y se mantiene activa sin interrupciones durante toda la transmisión (estados BIT_HOLD y SHIFT_NEXT), regresando a 0 al terminar.
+
 **Activación de done por un único ciclo:** Se comprueba que, al despachar el octavo bit, el sistema transiciona al estado DONE. En este punto, la señal done se activa (1) durante un ciclo de reloj antes de que el sistema regrese automáticamente al estado IDLE.
